@@ -8,9 +8,12 @@ class MoviesController < ApplicationController
   end
 
   def new_form
+    render("/movies/new_form.html.erb")
   end
 
   def create_row
+    @movie = Movie.new
+    
     @movie.title = params[:the_title]
     @movie.year = params[:the_year]
     @movie.duration = params[:the_duration]
@@ -20,7 +23,7 @@ class MoviesController < ApplicationController
 
     @movie.save
 
-    render("show")
+    redirect_to("/movies/"+@movie.id.to_s)
   end
 
   def edit_form
